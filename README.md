@@ -1,4 +1,5 @@
 HubbaBubba
 ==========
 
-TalentMarket as an App
+TalentMarket as a Locker App.
+
