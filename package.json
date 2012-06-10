@@ -1,0 +1,27 @@
+{
+  "author": "Advatar <johan@sellstrom.me>",
+  "name": "HubbaBubba",
+  "description": "Locker App Interface to the TalentMarket profile hub",
+  "version": "0.0.1",
+  "repository": {
+    "title": "HubbaBubba",
+    "handle": "hubbabubba",
+    "author": "advatar",
+    "update": "auto",
+    "github": "https://github.com/advatar/HubbaBubba",
+    "type": "app",
+    "static": "false",
+    "run": "open index.html",
+    "hidden": false,
+    "url": ""
+  },
+  "engines": {
+    "node": ">=0.4.9"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "postinstall": "echo 'nothing else to do'"
+  }
+  
+}
