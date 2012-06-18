@@ -1,7 +1,7 @@
 {
   "author": "Advatar <johan@sellstrom.me>",
   "name": "Profiles",
-  "description": "Locker App Interface to the TalentMarket profile hub",
+  "description": "Locker App Interface to the profile hub",
   "version": "0.0.1",
   "repository": {
     "title": "Profiles",

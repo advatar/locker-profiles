@@ -1,13 +1,264 @@
+<!DOCTYPE HTML>
 <html>
 <head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <title>Semantic Profiles</title>
+  <style>
+    body {
+      font-size: 16px;
+      line-height: 24px;
+      background: #FEFEFE;
+      color: #022;
+      height: 100%;
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, FreeSerif, serif;
+    }
+    div.container {
+      width: 720px;
+      margin: 50px 0 50px 50px;
+    }
+    p, li {
+      margin: 16px 0 16px 0;
+      width: 650px;
+    }
+      p.break {
+        margin-top: 35px;
+      }
+    ol {
+      padding-left: 24px;
+    }
+      ol li {
+        font-weight: bold;
+        margin-left: 0;
+      }
+    a, a:visited {
+      padding: 0 2px;
+      text-decoration: none;
+      background: #f0c095;
+      color: #252519;
+    }
+    a:active, a:hover {
+      color: #FFF;
+      background: #C25D00;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 40px;
+    }
+    b.header {
+      font-size: 18px;
+    }
+    span.alias {
+      font-size: 14px;
+      font-style: italic;
+      margin-left: 20px;
+    }
+    table {
+      margin: 16px 0; padding: 0;
+    }
+      tr, td, th {
+        margin: 0; padding: 0;
+        text-align: left;
+      }
+        th {
+          padding: 24px 0 0;
+        }
+        tr:first-child th {
+          padding-top: 0;
+        }
+        td {
+          padding: 6px 15px 6px 0;
+        }
+          td.definition {
+            line-height: 18px;
+            font-size: 14px;
+          }
+    table.downloads td {
+      padding-left: 18px;
+    }
+    .demo-hint {
+      font-size: 13px;
+      margin: 0 0 12px 12px;
+     width: 100%;
+      font-weight: normal;
+    }
+    #VS code, #VS pre, #VS tt {
+      font-family: Monaco, Consolas, "Lucida Console", monospace;
+      font-size: 12px;
+      line-height: 18px;
+      color: #444;
+      background: none;
+    }
+      #VS code {
+        margin-left: 8px;
+        padding: 0 0 0 12px;
+        font-weight: normal;
+      }
+      #VS pre {
+        font-size: 12px;
+        padding: 2px 0 2px 0;
+        border-left: 6px solid #829C37;
+        margin: 12px 0;
+      }
+    #search_query {
+      margin: 18px 0;
+      opacity: 0;
+    }
+      #search_query .raquo {
+        font-size: 18px;
+        line-height: 12px;
+        font-weight: bold;
+        margin-right: 4px;
+      }
+    #search_query2 {
+      margin: 18px 0;
+      opacity: 0;
+    }
+      #search_query2 .raquo {
+        font-size: 18px;
+        line-height: 12px;
+        font-weight: bold;
+        margin-right: 4px;
+      }
+  </style>
+
+  <link rel="stylesheet" href="visualsearch/lib/css/reset.css" type="text/css" media="screen" charset="utf-8">
+  <link rel="stylesheet" href="visualsearch/lib/css/icons.css" type="text/css" media="screen" charset="utf-8">
+  <link rel="stylesheet" href="visualsearch/lib/css/workspace.css" type="text/css" media="screen" charset="utf-8">
+
+  <script src="visualsearch/vendor/jquery-1.6.1.js" type="text/javascript" charset="utf-8"></script>
+  <!-- <script src="visualsearch/vendor/backported/jquery-1.4.4.js" type="text/javascript" charset="utf-8"></script> -->
+  <script src="visualsearch/vendor/jquery.ui.core.js" type="text/javascript" charset="utf-8"></script>
+  <script src="visualsearch/vendor/jquery.ui.widget.js" type="text/javascript" charset="utf-8"></script>
+  <script src="visualsearch/vendor/jquery.ui.position.js" type="text/javascript" charset="utf-8"></script>
+  <script src="visualsearch/vendor/jquery.ui.autocomplete.js" type="text/javascript" charset="utf-8"></script>
+  <script src="visualsearch/vendor/underscore-1.1.5.js" type="text/javascript" charset="utf-8"></script>
+  <script src="visualsearch/vendor/backbone-0.5.0.js" type="text/javascript" charset="utf-8"></script>
+  <script src="visualsearch/lib/js/visualsearch.js" type="text/javascript" charset="utf-8"></script>
+  <script src="visualsearch/lib/js/views/search_box.js" type="text/javascript" charset="utf-8"></script>
+  <script src="visualsearch/lib/js/views/search_facet.js" type="text/javascript" charset="utf-8"></script>
+  <script src="visualsearch/lib/js/views/search_input.js" type="text/javascript" charset="utf-8"></script>
+  <script src="visualsearch/lib/js/models/search_facets.js" type="text/javascript" charset="utf-8"></script>
+  <script src="visualsearch/lib/js/models/search_query.js" type="text/javascript" charset="utf-8"></script>
+  <script src="visualsearch/lib/js/utils/backbone_extensions.js" type="text/javascript" charset="utf-8"></script>
+  <script src="visualsearch/lib/js/utils/hotkeys.js" type="text/javascript" charset="utf-8"></script>
+  <script src="visualsearch/lib/js/utils/jquery_extensions.js" type="text/javascript" charset="utf-8"></script>
+  <script src="visualsearch/lib/js/utils/search_parser.js" type="text/javascript" charset="utf-8"></script>
+  <script src="visualsearch/lib/js/utils/inflector.js" type="text/javascript" charset="utf-8"></script>
+  <script src="visualsearch/lib/js/templates/templates.js" type="text/javascript" charset="utf-8"></script>
   <script src="https://api.hubinga.com/js/api.js" type="text/javascript"></script>
-  <script type="text/javascript">
-    $(function() {
-      var client = new APIClient('https://api.hubinga.com');
-      $('body').append('Talented!');
-    });
-  </script>
 </head>
 <body>
+
+  <div class="container" id="VS">
+
+    <h2 id="demo">Semantic Profile Search </h2><p><span class="demo-hint"><i>Valid Facets: <b>tag</b>, <b>filter</b>, <b>name</b>, <b>title</b>, <b>city</b>, , or <b>country</b>.</i></span></p>
+
+    <div id="search_box_container"></div>
+    <div id="search_query">&nbsp;</div>
+
+    <script type="text/javascript" charset="utf-8">
+      $(document).ready(function() {
+        window.visualSearch = VS.init({
+          container  : $('#search_box_container'),
+          query      : 'country: "Croatia" name: "Smiljan Pilipovic" "tag": "Google Maps"',
+          // query      : '',
+          unquotable : [
+            'text',
+            'tag',
+            'filter'
+          ],
+          callbacks  : {
+            search : function(query, searchCollection) {
+              var $query = $('#search_query');
+              $query.stop().animate({opacity : 1}, {duration: 300, queue: false});
+              $query.html('<span class="raquo">&raquo;</span> You searched for: <b>' + searchCollection.serialize() + '</b>');
+              clearTimeout(window.queryHideDelay);
+              window.queryHideDelay = setTimeout(function() {
+                $query.animate({
+                  opacity : 0
+                }, {
+                  duration: 1000,
+                  queue: false
+                });
+              }, 2000);
+            },
+            valueMatches : function(category, searchTerm, callback) {
+              switch (category) {
+                 case 'name':
+                  callback(['Sofi W. Elfving','Neil Urquhart','Nina Washington','Maxim Teslenko','Sara Gestrelius','Vanja Divkovic','Vedran Mikac','Smiljan Pilipovic','Martin','Per Danielsson','Andreas Rådlund','Johan Sellström','Patricia Grunéus','Torsten Ek']);
+                  break;
+                 case 'tag':
+                  callback(['java', 'html5','javascript', 'LTE','Google Maps']);
+                  break;
+                 case 'title':
+                  callback([
+                    'CTO',
+                    'CEO',
+                    'Solutions Architect',
+                    'Senior Developer'
+                  ]);
+                  break;
+                case 'city':
+                  callback([
+                    'Cleveland',
+                    'New York City',
+                    'Brooklyn',
+                    'Manhattan',
+                    'Queens',
+                    'The Bronx',
+                    'Staten Island',
+                    'San Francisco',
+                    'Los Angeles',
+                    'Seattle',
+                    'London',
+                    'Portland',
+                    'Chicago',
+                    'Boston'
+                  ])
+                  break;
+                 case 'country':
+                  callback([
+                    "China", "India", "United States", "Indonesia", "Brazil",
+                    "Pakistan", "Bangladesh", "Nigeria", "Russia", "Japan",
+                    "Mexico", "Philippines", "Vietnam", "Ethiopia", "Egypt",
+                    "Germany", "Turkey", "Iran", "Thailand", "D. R. of Congo",
+                    "France", "United Kingdom", "Italy", "Myanmar", "South Africa",
+                    "South Korea", "Colombia", "Ukraine", "Spain", "Tanzania",
+                    "Sudan", "Kenya", "Argentina", "Poland", "Algeria",
+                    "Canada", "Uganda", "Morocco", "Iraq", "Nepal",
+                    "Peru", "Afghanistan", "Venezuela", "Malaysia", "Uzbekistan",
+                    "Saudi Arabia", "Ghana", "Yemen", "North Korea", "Mozambique",
+                    "Taiwan", "Syria", "Ivory Coast", "Australia", "Romania",
+                    "Sri Lanka", "Madagascar", "Cameroon", "Angola", "Chile",
+                    "Netherlands", "Burkina Faso", "Niger", "Kazakhstan", "Malawi",
+                    "Cambodia", "Guatemala", "Ecuador", "Mali", "Zambia",
+                    "Senegal", "Zimbabwe", "Chad", "Cuba", "Greece",
+                    "Portugal", "Belgium", "Czech Republic", "Tunisia", "Guinea",
+                    "Rwanda", "Dominican Republic", "Haiti", "Bolivia", "Hungary",
+                    "Belarus", "Somalia", "Sweden", "Benin", "Azerbaijan",
+                    "Burundi", "Austria", "Honduras", "Switzerland", "Bulgaria",
+                    "Serbia", "Israel", "Tajikistan", "Hong Kong", "Papua New Guinea",
+                    "Togo", "Libya", "Jordan", "Paraguay", "Laos",
+                    "El Salvador", "Sierra Leone", "Nicaragua", "Kyrgyzstan", "Denmark",
+                    "Slovakia", "Finland", "Eritrea", "Turkmenistan"
+                  ], {preserveOrder: true});
+                  break;
+              }
+            },
+            facetMatches : function(callback) {
+              callback([
+                'account', 'filter', 'access', 'title',
+                { label: 'city',    category: 'location' },
+                { label: 'address', category: 'location' },
+                { label: 'country', category: 'location' }
+              ]);
+            }
+          }
+        });
+      });
+    </script>
+    
+  </div>
+
 </body>
+</html>
